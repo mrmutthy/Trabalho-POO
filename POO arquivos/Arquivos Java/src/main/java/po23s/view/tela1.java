@@ -17,6 +17,8 @@ public class tela1 extends javax.swing.JFrame {
 
     private DefaultListModel<String> modelo;
     private DefaultListModel<String> modelo2;
+    private List<Livro> album;
+    
     
     
     public tela1() {
@@ -26,27 +28,15 @@ public class tela1 extends javax.swing.JFrame {
         modelo2 = new DefaultListModel<>();
         
         
+        this.album = new ArrayList<>();
+
+        
         nomelivro.setModel(modelo);
         autorlivro.setModel(modelo2);
     }
 
     
-   /* private void customInitComponents() {
-        modelo = new DefaultListModel<>();
 
-        nomelivro.setModel(new AbstractListModel<String>() {
-            @Override
-            public int getSize() {
-                return modelo.getSize();
-            }
-
-            @Override
-            public Livro getElementAt(int i) {
-                return modelo.getElementAt(i);
-            }
-        });
-        }
-        */
      
     
 
@@ -107,7 +97,7 @@ public class tela1 extends javax.swing.JFrame {
 
         jLabel1.setText("Titulo");
 
-        jLabel2.setText("Autor");
+        jLabel2.setText("Editora");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -258,7 +248,8 @@ public class tela1 extends javax.swing.JFrame {
         
         modelo.clear();
         modelo2.clear();
- 
+        
+        
         if (itensJson != null) {
             for (int i = 0; i < itensJson.length(); i++) {
                 JSONObject item = itensJson.getJSONObject(i);
@@ -291,15 +282,21 @@ public class tela1 extends javax.swing.JFrame {
 
                     JSONArray autoresJson = volumeInfo.optJSONArray("authors");
                     
-                                    if (autoresJson != null) {
+                    if (autoresJson != null) {
                         for (int j = 0; j < autoresJson.length(); j++) {
                             autores.add(autoresJson.getString(j));
                         }
                     }
+                    
+                    /*if (publisher.isEmpty()){                
+                        livro.setEditora("Editora não disponível!");
+                    }*/
+                    
                     if (autores.isEmpty()){
-                        autores.add("Autores Desconhecido!");
+                        autores.add("Autores Desconhecido!");                        
                     }
-                    livro.setAutores(autores); 
+                    livro.setAutores(autores);
+                     
                 }
                 
                     JSONObject listPrice = saleInfo.optJSONObject("listPrice");
@@ -319,7 +316,7 @@ public class tela1 extends javax.swing.JFrame {
                 modelo.addElement(Title);
                 modelo2.addElement(Publisher);
                 
-                
+                album.add(livro);
                 
                 
                 
@@ -341,7 +338,10 @@ public class tela1 extends javax.swing.JFrame {
       
         
         tela2 visor = new tela2(this, true); 
-    //    visor.passadados(nome, autor, editora, valor, pdf, descricao);
+        
+        album.get(nomelivro.getSelectedIndex());
+            
+            visor.passadados(album.get(nomelivro.getSelectedIndex()).getTitulo(), album.get(nomelivro.getSelectedIndex()).getAutores(), album.get(nomelivro.getSelectedIndex()).getEditora(), album.get(nomelivro.getSelectedIndex()).getValor(), album.get(nomelivro.getSelectedIndex()).getDescricao());
         visor.setVisible(true);
        
     }//GEN-LAST:event_troca
