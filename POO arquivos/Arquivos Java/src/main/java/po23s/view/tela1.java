@@ -10,20 +10,24 @@ import java.util.List;
 import javax.swing.ListModel;
 import javax.swing.event.ListDataListener;
 import javax.swing.AbstractListModel;
+import javax.swing.JOptionPane;
 
 
 public class tela1 extends javax.swing.JFrame {
 
     private DefaultListModel<String> modelo;
-    
+    private DefaultListModel<String> modelo2;
     
     
     public tela1() {
         initComponents();
         //customInitComponents();
         modelo = new DefaultListModel<>();
+        modelo2 = new DefaultListModel<>();
+        
         
         nomelivro.setModel(modelo);
+        autorlivro.setModel(modelo2);
     }
 
     
@@ -54,17 +58,20 @@ public class tela1 extends javax.swing.JFrame {
         jInternalFrame1 = new javax.swing.JInternalFrame();
         pesquisa = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jScrollBar1 = new javax.swing.JScrollBar();
         jLabel9 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         nomelivro = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        autorlivro = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         quantos = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jInternalFrame1.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        jInternalFrame1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jInternalFrame1.setVisible(true);
 
         pesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -91,21 +98,49 @@ public class tela1 extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(nomelivro);
 
+        autorlivro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                troca(evt);
+            }
+        });
+        jScrollPane2.setViewportView(autorlivro);
+
+        jLabel1.setText("Titulo");
+
+        jLabel2.setText("Autor");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(8, 8, 8))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel11.setText("Quantidade:");
@@ -124,20 +159,20 @@ public class tela1 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel9)
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(quantos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
-                .addGap(12, 12, Short.MAX_VALUE))
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(quantos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(21, 21, 21))))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,15 +186,9 @@ public class tela1 extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(quantos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(6, 6, 6)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -203,32 +232,33 @@ public class tela1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String buscar = pesquisa.getText();
-    //    int quantidade = Integer.parseInt(quantos.getText());
+        int quantidade;
        
+        try{
+            quantidade = Integer.parseInt(quantos.getText());
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Informe um numero valido", "ERRO!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
+        
+        //ClienteHttp cliente = new ClienteHttp();
+        //String json = cliente.buscaDados("https://www.googleapis.com/books/v1/volumes?q="+ buscar);
         
         ClienteHttp cliente = new ClienteHttp();
-        String json = cliente.buscaDados("https://www.googleapis.com/books/v1/volumes?q="+ buscar);
+        String url = "https://www.googleapis.com/books/v1/volumes?q="+ buscar;
+        if (quantidade > 0) {
+            url = url += "&maxResults=" + quantidade;
+        }
+        String json = cliente.buscaDados(url);
+
         
         JSONObject jsonObject = new JSONObject(json);
         JSONArray itensJson = jsonObject.optJSONArray("items");
         
-        //modelo.clear();
-        
-             /*for (int i = 0; i < itensJson.length(); i++) {
-                JSONObject item = itensJson.getJSONObject(i);
-                JSONObject volumeInfo = item.optJSONObject("volumeInfo");
-                JSONObject saleInfo = item.optJSONObject("saleInfo");
-                JSONObject accessInfo = item.optJSONObject("accessInfo");
-                Livro livro = new Livro();
-         
-                String Title = volumeInfo.optString("title");
-                livro.setTitulo(Title);
-
-                
-                System.out.println(Title);
-                
-                modelo.addElement(Title);} */  
+        modelo.clear();
+        modelo2.clear();
+ 
         if (itensJson != null) {
             for (int i = 0; i < itensJson.length(); i++) {
                 JSONObject item = itensJson.getJSONObject(i);
@@ -244,9 +274,9 @@ public class tela1 extends javax.swing.JFrame {
                 String Descricao = volumeInfo.optString("description");
                 livro.setDescricao(Descricao);
                 
-                System.out.println(Title);
+            //    System.out.println(Title);
                 
-                modelo.addElement(Title);
+                
                 
                 
                 if (volumeInfo != null) {
@@ -277,7 +307,6 @@ public class tela1 extends javax.swing.JFrame {
                             double valor = listPrice.optDouble("amount", 0.0);
                             livro.setValor(valor);
                         } else {
-                        // Trate o caso em que "listPrice" é nulo, se necessário
                     }
 
                 
@@ -287,9 +316,8 @@ public class tela1 extends javax.swing.JFrame {
                 }
 
                 
-                
-                //modelo.clear();
-                //modelo.addElement(livro);
+                modelo.addElement(Title);
+                modelo2.addElement(Publisher);
                 
                 
                 
@@ -356,14 +384,17 @@ public class tela1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> autorlivro;
     private javax.swing.JButton jButton1;
     private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JList<String> nomelivro;
     private javax.swing.JTextField pesquisa;
     private javax.swing.JTextField quantos;
