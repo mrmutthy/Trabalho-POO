@@ -2,21 +2,51 @@
 package po23s.view;
 import po23s.http.ClienteHttp;
 import po23s.model.Livro;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.DefaultListModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ListModel;
+import javax.swing.event.ListDataListener;
+import javax.swing.AbstractListModel;
+
 
 public class tela1 extends javax.swing.JFrame {
 
- 
+    private DefaultListModel<String> modelo;
+    
+    
+    
     public tela1() {
         initComponents();
+        //customInitComponents();
+        modelo = new DefaultListModel<>();
+        
+        nomelivro.setModel(modelo);
     }
 
+    
+   /* private void customInitComponents() {
+        modelo = new DefaultListModel<>();
 
-    @SuppressWarnings("unchecked")
+        nomelivro.setModel(new AbstractListModel<String>() {
+            @Override
+            public int getSize() {
+                return modelo.getSize();
+            }
+
+            @Override
+            public Livro getElementAt(int i) {
+                return modelo.getElementAt(i);
+            }
+        });
+        }
+        */
+     
+    
+
+     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -27,8 +57,8 @@ public class tela1 extends javax.swing.JFrame {
         jScrollBar1 = new javax.swing.JScrollBar();
         jLabel9 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        nomelivro = new javax.swing.JList<>();
         jLabel11 = new javax.swing.JLabel();
         quantos = new javax.swing.JTextField();
 
@@ -54,31 +84,12 @@ public class tela1 extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Registro", "Autor", "Valor"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        nomelivro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                escolherRegistro(evt);
+                troca(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane1.setViewportView(nomelivro);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -86,15 +97,15 @@ public class tela1 extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLabel11.setText("Quantidade:");
@@ -187,23 +198,37 @@ public class tela1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_pesquisaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String buscar = pesquisa.getText();
-        int quantidade = Integer.parseInt(quantos.getText());
+    //    int quantidade = Integer.parseInt(quantos.getText());
        
-            
         
         
         ClienteHttp cliente = new ClienteHttp();
         String json = cliente.buscaDados("https://www.googleapis.com/books/v1/volumes?q="+ buscar);
-        if (quantidade != 0){
-            json = String.format(json, "maxResults"+ quantidade);
-        }
+        
         JSONObject jsonObject = new JSONObject(json);
         JSONArray itensJson = jsonObject.optJSONArray("items");
+        
+        //modelo.clear();
+        
+             /*for (int i = 0; i < itensJson.length(); i++) {
+                JSONObject item = itensJson.getJSONObject(i);
+                JSONObject volumeInfo = item.optJSONObject("volumeInfo");
+                JSONObject saleInfo = item.optJSONObject("saleInfo");
+                JSONObject accessInfo = item.optJSONObject("accessInfo");
+                Livro livro = new Livro();
+         
+                String Title = volumeInfo.optString("title");
+                livro.setTitulo(Title);
+
+                
+                System.out.println(Title);
+                
+                modelo.addElement(Title);} */  
         if (itensJson != null) {
             for (int i = 0; i < itensJson.length(); i++) {
                 JSONObject item = itensJson.getJSONObject(i);
@@ -212,12 +237,23 @@ public class tela1 extends javax.swing.JFrame {
                 JSONObject accessInfo = item.optJSONObject("accessInfo");
                 Livro livro = new Livro();
          
-
+                String Title = volumeInfo.optString("title");
+                livro.setTitulo(Title);
+                String Publisher = volumeInfo.optString("publisher");
+                livro.setEditora(Publisher);
+                String Descricao = volumeInfo.optString("description");
+                livro.setDescricao(Descricao);
+                
+                System.out.println(Title);
+                
+                modelo.addElement(Title);
+                
+                
                 if (volumeInfo != null) {
                     List<String> autores = new ArrayList<>();
 
-                    String titulo = volumeInfo.optString("title", "Título não disponível!");
-                    livro.setTitulo(titulo);
+                    String title = volumeInfo.optString("title", "Título não disponível!");
+                    livro.setTitulo(title);
                     String publisher = volumeInfo.optString("publisher", "Editora não disponível!");
                     livro.setEditora(publisher);
                     String descricao = volumeInfo.optString("description", "Descrição não disponível!");
@@ -225,8 +261,7 @@ public class tela1 extends javax.swing.JFrame {
 
                     JSONArray autoresJson = volumeInfo.optJSONArray("authors");
                     
-                    
-                    if (autoresJson != null) {
+                                    if (autoresJson != null) {
                         for (int j = 0; j < autoresJson.length(); j++) {
                             autores.add(autoresJson.getString(j));
                         }
@@ -237,28 +272,51 @@ public class tela1 extends javax.swing.JFrame {
                     livro.setAutores(autores); 
                 }
                 
-                if(saleInfo != null){
-                    double valor = saleInfo.optJSONObject("listPrice").optDouble("amount", 0.0);
-                    livro.setValor(valor);
-                }
+                    JSONObject listPrice = saleInfo.optJSONObject("listPrice");
+                        if (listPrice != null) {
+                            double valor = listPrice.optDouble("amount", 0.0);
+                            livro.setValor(valor);
+                        } else {
+                        // Trate o caso em que "listPrice" é nulo, se necessário
+                    }
+
                 
                 if (accessInfo != null){
                     boolean disponivelPDF = accessInfo.optJSONObject("pdf").optBoolean("isAvailable", false);
                     livro.setDisponivelPDF(disponivelPDF);
                 }
+
                 
+                
+                //modelo.clear();
+                //modelo.addElement(livro);
+                
+                
+                
+                
+                
+                        
+                        
             }
-        }    
+        
+            
+            
+            
+        }   
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void quantosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_quantosActionPerformed
 
-    private void escolherRegistro(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_escolherRegistro
-
-        new tela2().setVisible(true);
-    }//GEN-LAST:event_escolherRegistro
+    private void troca(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_troca
+      
+        
+        tela2 visor = new tela2(this, true); 
+    //    visor.passadados(nome, autor, editora, valor, pdf, descricao);
+        visor.setVisible(true);
+       
+    }//GEN-LAST:event_troca
 
     /**
      * @param args the command line arguments
@@ -305,8 +363,8 @@ public class tela1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollBar jScrollBar1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JList<String> nomelivro;
     private javax.swing.JTextField pesquisa;
     private javax.swing.JTextField quantos;
     // End of variables declaration//GEN-END:variables
