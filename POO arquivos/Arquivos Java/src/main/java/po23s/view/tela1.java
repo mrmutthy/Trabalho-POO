@@ -1,4 +1,3 @@
-
 package po23s.view;
 import po23s.http.ClienteHttp;
 import po23s.model.Livro;
@@ -20,7 +19,7 @@ public class tela1 extends javax.swing.JFrame {
     
     public tela1() {
         initComponents();
-        //customInitComponents();
+
         modelo = new DefaultListModel<>();
         modelo2 = new DefaultListModel<>();
         
@@ -31,11 +30,7 @@ public class tela1 extends javax.swing.JFrame {
         nomelivro.setModel(modelo);
         autorlivro.setModel(modelo2);
     }
-
-    
-
-     
-    
+  
 
      @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -234,10 +229,6 @@ public class tela1 extends javax.swing.JFrame {
             return;
         }
         
-        
-        //ClienteHttp cliente = new ClienteHttp();
-        //String json = cliente.buscaDados("https://www.googleapis.com/books/v1/volumes?q="+ buscar);
-        
         ClienteHttp cliente = new ClienteHttp();
         String url = "https://www.googleapis.com/books/v1/volumes?q="+ buscar;
         if (quantidade > 0) {
@@ -260,18 +251,7 @@ public class tela1 extends javax.swing.JFrame {
                 JSONObject saleInfo = item.optJSONObject("saleInfo");
                 JSONObject accessInfo = item.optJSONObject("accessInfo");
                 Livro livro = new Livro();
-         
-                /*String Title = volumeInfo.optString("title");
-                livro.setTitulo(Title);
-                String Publisher = volumeInfo.optString("publisher");
-                livro.setEditora(Publisher);
-                String Descricao = volumeInfo.optString("description");
-                livro.setDescricao(Descricao);*/
-                
-            //    System.out.println(Title);
-                
-                
-                
+                              
                 
                 if (volumeInfo != null) {
                     List<String> autores = new ArrayList<>();
@@ -311,20 +291,12 @@ public class tela1 extends javax.swing.JFrame {
                     livro.setDisponivelPDF(disponivelPDF);
                 }
 
-                /*
-                    if (publisher.isEmpty()){                
-                        livro.setEditora("Editora não disponível!");
-                    }*/
                 
                 modelo.addElement(livro.getTitulo());
                 modelo2.addElement(livro.getEditora());
                 
                 album.add(livro);
-                
-                
-                
-                        
-                        
+                 
             }
         
             
@@ -334,7 +306,7 @@ public class tela1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void quantosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantosActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_quantosActionPerformed
 
     private void troca(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_troca
@@ -349,34 +321,9 @@ public class tela1 extends javax.swing.JFrame {
        
     }//GEN-LAST:event_troca
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(tela1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(tela1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(tela1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(tela1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
+    public static void main(String args[]) {
+
         java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
         tela1 tela = new tela1();
