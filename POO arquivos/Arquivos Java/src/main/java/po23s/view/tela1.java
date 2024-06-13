@@ -291,10 +291,6 @@ public class tela1 extends javax.swing.JFrame {
                         }
                     }
                     
-                    /*if (publisher.isEmpty()){                
-                        livro.setEditora("Editora não disponível!");
-                    }*/
-                    
                     if (autores.isEmpty()){
                         autores.add("Autores Desconhecido!");                        
                     }
@@ -315,9 +311,13 @@ public class tela1 extends javax.swing.JFrame {
                     livro.setDisponivelPDF(disponivelPDF);
                 }
 
+                /*
+                    if (publisher.isEmpty()){                
+                        livro.setEditora("Editora não disponível!");
+                    }*/
                 
                 modelo.addElement(Title);
-                modelo2.addElement(Publisher);
+                modelo2.addElement(livro.getEditora());
                 
                 album.add(livro);
                 
