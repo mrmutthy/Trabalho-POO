@@ -121,6 +121,7 @@ public class tela2 extends javax.swing.JDialog {
         livrinho.setIcon(new javax.swing.ImageIcon("C:\\Users\\gui.DESKTOP-47U1MIN\\Documents\\GitHub\\Trabalho-POO\\POO arquivos\\Arquivos Java\\src\\main\\java\\po23s\\view\\livro3.png")); // NOI18N
 
         linha5.setText("PDF");
+        linha5.setEnabled(false);
         linha5.setHideActionText(true);
         linha5.setOpaque(true);
         linha5.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -129,7 +130,6 @@ public class tela2 extends javax.swing.JDialog {
             }
         });
 
-        linha6.setBackground(new java.awt.Color(255, 255, 255));
         linha6.setColumns(20);
         linha6.setLineWrap(true);
         linha6.setRows(5);
@@ -182,7 +182,7 @@ public class tela2 extends javax.swing.JDialog {
     }//GEN-LAST:event_linha5StateChanged
 
 
-    void passadados(String nome, List<String> autores, String editora, double valor, String descricao){
+    void passadados(String nome, List<String> autores, String editora, double valor, boolean isPdf, String descricao){
         linha1.setText(nome);
         
         for (int i = 0; i < autores.size(); i++) {
@@ -191,7 +191,7 @@ public class tela2 extends javax.swing.JDialog {
         
         linha3.setText(editora);
         linha4.setText(String.format("%.2f", valor));
-    //    linha5.setText(pdf);
+        linha5.setSelected(isPdf);
         linha6.setText(descricao);
     
     }

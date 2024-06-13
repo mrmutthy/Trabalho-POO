@@ -261,12 +261,12 @@ public class tela1 extends javax.swing.JFrame {
                 JSONObject accessInfo = item.optJSONObject("accessInfo");
                 Livro livro = new Livro();
          
-                String Title = volumeInfo.optString("title");
+                /*String Title = volumeInfo.optString("title");
                 livro.setTitulo(Title);
                 String Publisher = volumeInfo.optString("publisher");
                 livro.setEditora(Publisher);
                 String Descricao = volumeInfo.optString("description");
-                livro.setDescricao(Descricao);
+                livro.setDescricao(Descricao);*/
                 
             //    System.out.println(Title);
                 
@@ -316,7 +316,7 @@ public class tela1 extends javax.swing.JFrame {
                         livro.setEditora("Editora não disponível!");
                     }*/
                 
-                modelo.addElement(Title);
+                modelo.addElement(livro.getTitulo());
                 modelo2.addElement(livro.getEditora());
                 
                 album.add(livro);
@@ -344,7 +344,7 @@ public class tela1 extends javax.swing.JFrame {
         
         album.get(nomelivro.getSelectedIndex());
             
-            visor.passadados(album.get(nomelivro.getSelectedIndex()).getTitulo(), album.get(nomelivro.getSelectedIndex()).getAutores(), album.get(nomelivro.getSelectedIndex()).getEditora(), album.get(nomelivro.getSelectedIndex()).getValor(), album.get(nomelivro.getSelectedIndex()).getDescricao());
+            visor.passadados(album.get(nomelivro.getSelectedIndex()).getTitulo(), album.get(nomelivro.getSelectedIndex()).getAutores(), album.get(nomelivro.getSelectedIndex()).getEditora(), album.get(nomelivro.getSelectedIndex()).getValor(),album.get(nomelivro.getSelectedIndex()).isDisponivelPDF(), album.get(nomelivro.getSelectedIndex()).getDescricao());
         visor.setVisible(true);
        
     }//GEN-LAST:event_troca
