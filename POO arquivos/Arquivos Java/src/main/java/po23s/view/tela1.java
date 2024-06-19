@@ -224,11 +224,11 @@ public class tela1 extends javax.swing.JFrame {
        
         try{
             quantidade = Integer.parseInt(quantos.getText());
-        } catch(Exception e){
+        } catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Informe um numero valido", "ERRO!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+        //try
         ClienteHttp cliente = new ClienteHttp();
         String url = "https://www.googleapis.com/books/v1/volumes?q="+ buscar;
         if (quantidade > 0) {
@@ -243,7 +243,7 @@ public class tela1 extends javax.swing.JFrame {
         modelo.clear();
         modelo2.clear();
         
-        
+        try {
         if (itensJson != null) {
             for (int i = 0; i < itensJson.length(); i++) {
                 JSONObject item = itensJson.getJSONObject(i);
@@ -298,11 +298,15 @@ public class tela1 extends javax.swing.JFrame {
                 album.add(livro);
                  
             }
+}
+        } catch (Exception e){
+            System.out.println("Json Não Encontrado!");
+        };
         
             
             
             
-        }   
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void quantosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantosActionPerformed
