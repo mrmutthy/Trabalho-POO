@@ -19,7 +19,7 @@ public class tela1 extends javax.swing.JFrame {
     
     public tela1() {
         initComponents();
-
+        
         modelo = new DefaultListModel<>();
         modelo2 = new DefaultListModel<>();
         
@@ -30,8 +30,9 @@ public class tela1 extends javax.swing.JFrame {
         nomelivro.setModel(modelo);
         autorlivro.setModel(modelo2);
     }
-  
 
+  
+    
      @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -136,19 +137,7 @@ public class tela1 extends javax.swing.JFrame {
 
         jLabel9.setText("Digite o nome do Livro:");
 
-        pesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pesquisaActionPerformed(evt);
-            }
-        });
-
         jLabel11.setText("Quantidade:");
-
-        quantos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quantosActionPerformed(evt);
-            }
-        });
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -214,10 +203,6 @@ public class tela1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaActionPerformed
-
-    }//GEN-LAST:event_pesquisaActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String buscar = pesquisa.getText();
         int quantidade;
@@ -225,25 +210,28 @@ public class tela1 extends javax.swing.JFrame {
         try{
             quantidade = Integer.parseInt(quantos.getText());
         } catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "Informe um numero valido", "ERRO!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Informe um numero valido!", "ERRO!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        //try
+        try{
         ClienteHttp cliente = new ClienteHttp();
         String url = "https://www.googleapis.com/books/v1/volumes?q="+ buscar;
         if (quantidade > 0) {
             url = url += "&maxResults=" + quantidade;
         }
-        String json = cliente.buscaDados(url);
-
+        String json = cliente.buscaDados(url); 
         
         JSONObject jsonObject = new JSONObject(json);
         JSONArray itensJson = jsonObject.optJSONArray("items");
+            
+        
+            
+        
         
         modelo.clear();
         modelo2.clear();
         
-        try {
+        
         if (itensJson != null) {
             for (int i = 0; i < itensJson.length(); i++) {
                 JSONObject item = itensJson.getJSONObject(i);
@@ -300,19 +288,17 @@ public class tela1 extends javax.swing.JFrame {
             }
 }
         } catch (Exception e){
-            System.out.println("Json Não Encontrado!");
+            JOptionPane.showMessageDialog(this, "JSon não encontrado!", "ERRO!", JOptionPane.ERROR_MESSAGE);
         };
         
             
-            
-            
+
         
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void quantosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantosActionPerformed
-
-    }//GEN-LAST:event_quantosActionPerformed
-
+   
+    
+    
+    
     private void troca(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_troca
       
         
