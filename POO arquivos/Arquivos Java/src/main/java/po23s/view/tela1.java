@@ -209,10 +209,18 @@ public class tela1 extends javax.swing.JFrame {
        
         try{
             quantidade = Integer.parseInt(quantos.getText());
+            
+            if(quantidade < 0 || quantidade > 40){
+                quantidade = 40;
+                System.out.println("Numero fora do escopo, usado o maximo: 40");
+            }else{
+                
+            }
         } catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Informe um numero valido!", "ERRO!", JOptionPane.ERROR_MESSAGE);
             return;
         }
+ 
         try{
         ClienteHttp cliente = new ClienteHttp();
         String url = "https://www.googleapis.com/books/v1/volumes?q="+ buscar;
@@ -224,9 +232,7 @@ public class tela1 extends javax.swing.JFrame {
         JSONObject jsonObject = new JSONObject(json);
         JSONArray itensJson = jsonObject.optJSONArray("items");
             
-        
-            
-        
+       
         
         modelo.clear();
         modelo2.clear();
