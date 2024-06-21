@@ -223,7 +223,7 @@ public class tela1 extends javax.swing.JFrame {
  
         try{
         ClienteHttp cliente = new ClienteHttp();
-        String url = "https://www.googleapis.com/books/v1/volumes?q="+ buscar;
+        String url = "https://www.googleapis.com/books/v1/volumes?q="+ buscar.replaceAll("\\s", "");
         if (quantidade > 0) {
             url = url += "&maxResults=" + quantidade;
         }
