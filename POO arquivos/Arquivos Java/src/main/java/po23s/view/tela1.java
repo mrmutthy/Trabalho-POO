@@ -294,7 +294,7 @@ public class tela1 extends javax.swing.JFrame {
             }
 }
         } catch (Exception e){
-            JOptionPane.showMessageDialog(this, "JSon não encontrado!", "ERRO!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao encontrar o Livro!", "ERRO!", JOptionPane.ERROR_MESSAGE);
         };
         
             
