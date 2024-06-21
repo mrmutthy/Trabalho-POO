@@ -114,7 +114,7 @@ public class tela2 extends javax.swing.JDialog {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        livrinho.setIcon(new javax.swing.ImageIcon("C:\\Users\\gui.DESKTOP-47U1MIN\\Documents\\GitHub\\Trabalho-POO\\POO arquivos\\Arquivos Java\\src\\main\\java\\po23s\\view\\livro3.png")); // NOI18N
+        livrinho.setIcon(new javax.swing.ImageIcon("C:\\Users\\emanu\\OneDrive\\Documentos\\GitHub\\Trabalho-POO\\POO arquivos\\Arquivos Java\\src\\main\\java\\po23s\\view\\livro3.png")); // NOI18N
 
         linha5.setEnabled(false);
         linha5.setHideActionText(true);
